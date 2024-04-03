@@ -100,8 +100,6 @@ return {
                     lspconfig.clangd.setup {
                         capabilities = capabilities,
                         on_attach = on_attach,
-                        cmd = { "clangd", "--header-insertion=never", "--suggest-missing-includes", "-I/usr/local/cuda/include" },
-                        --root_dir = lspconfig.util.root_pattern(".git", "compile_commands.json"),
                     }
                 end,
             }
