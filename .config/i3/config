@@ -184,7 +184,7 @@ for_window [title="mainTerm"] move to workspace number $ws1
 #startup applications
 exec --no-startup-id alacritty --title mainTerm
 exec --no-startup-id firefox
-exec --no-startup-id discord
+exec --no-startup-id Discord
 exec --no-startup-id google-chrome
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom
