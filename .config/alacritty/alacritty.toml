@@ -3,6 +3,16 @@
   x = 0
   y = 0
 
+[font.normal]
+family = "FiraMono Nerd Font"
+style = "Regular"
+
+[font.bold]
+style = "Bold"
+
+[font.italic]
+style = "Italic"
+
 [colors.primary]
 background = "0x282828"
 foreground = "0xdfbf8e"
