@@ -105,5 +105,5 @@ bindkey -s ^f "tmux-sessionizer\n"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export PATH=$PATH:~/scripts/
+export PATH=$PATH:~/scripts
 export PATH=/usr/local/cuda-12.4/bin${PATH:+:${PATH}}
