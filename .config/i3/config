@@ -176,7 +176,7 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-assign [class="Firefox-esr"] $ws2
+assign [class="firefox"] $ws2
 assign [class="discord"] $ws3
 for_window [title="Google Chrome"] move to workspace number $ws4
 for_window [title="mainTerm"] move to workspace number $ws1
