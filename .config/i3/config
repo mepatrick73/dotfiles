@@ -141,9 +141,9 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: Term"
-set $ws2 "2: Firefox"
+set $ws2 "2: Chrome"
 set $ws3 "3: Discord"
-set $ws4 "4: Chrome"
+set $ws4 "4: Firefox"
 set $ws5 "5: PDF"
 set $ws6 "6: Gimp"
 set $ws7 "7"
@@ -176,10 +176,10 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-assign [class="firefox"] $ws2
-assign [class="discord"] $ws3
-for_window [title="Google Chrome"] move to workspace number $ws4
 for_window [title="mainTerm"] move to workspace number $ws1
+for_window [title="Google Chrome"] move to workspace number $ws2
+assign [class="firefox"] $ws4
+assign [class="discord"] $ws3
 
 #startup applications
 exec --no-startup-id alacritty --title mainTerm
