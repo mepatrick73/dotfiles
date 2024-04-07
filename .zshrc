@@ -75,7 +75,9 @@ git
 zsh-autosuggestions
 )
 
+export ZSH=/home/patrick/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 bindkey -s ^f "tmux-sessionizer\n"
