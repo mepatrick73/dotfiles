@@ -38,3 +38,42 @@ cyan = "0x89b482"
 white = "0xdfbf8e"
 
 
+[[keyboard.bindings]]
+key = "H"
+mods = "Control|Shift"
+chars = "\u001b[72;6u"
+
+[[keyboard.bindings]]
+key = "J"
+mods = "Control|Shift"
+chars = "\u001b[74;6u"
+
+[[keyboard.bindings]]
+key = "K"
+mods = "Control|Shift"
+chars = "\u001b[75;6u"
+
+[[keyboard.bindings]]
+key = "L"
+mods = "Control|Shift"
+chars = "\u001b[76;6u"
+
+[[keyboard.bindings]]
+key = "I"
+mods = "Control"
+chars = "\u001b[105;5u"
+
+[[keyboard.bindings]]
+key = "Period"
+mods = "Control"
+chars = "\u001b[46;5u"
+
+[[keyboard.bindings]]
+key = "Comma"
+mods = "Control"
+chars = "\u001b[44;5u"
+
+[[keyboard.bindings]]
+key = "Semicolon"
+mods = "Control"
+chars = "\u001b[59;5u"
