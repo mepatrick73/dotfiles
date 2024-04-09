@@ -108,6 +108,7 @@ bindkey -s ^f "tmux-sessionizer\n"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
+alias lg="lazygit"
 
 export PATH=$PATH:~/scripts
 export PATH=/usr/local/cuda-12.4/bin${PATH:+:${PATH}}
