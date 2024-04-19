@@ -65,15 +65,17 @@ return {
                 "stylua",
                 "prettierd",
                 "autopep8",
+                "clang-format",
             },
         })
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
-                "tsserver",
+                "volar@1.8.27",
+                --"tsserver",
                 "pyright",
-                --"volar@1.8.27"
+                "clangd",
             },
             handlers = {
                 function(server_name) -- default handler
@@ -97,14 +99,14 @@ return {
                         },
                     })
                 end,
-                --["volar"] = function()
-                --    local lspconfig = require("lspconfig")
-                --    lspconfig.volar.setup {
-                --        capabilities = capabilities,
-                --        on_attach = on_attach,
-                --        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
-                --    }
-                --end,
+                ["volar"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.volar.setup {
+                        capabilities = capabilities,
+                        on_attach = on_attach,
+                        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
+                    }
+                end,
                 ["clangd"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.clangd.setup({
@@ -127,7 +129,7 @@ return {
                 ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
                 ["<C-Space>"] = cmp.mapping.complete({}),
-                ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+                ["<C-i>"] = cmp.mapping.confirm({ select = true }),
                 ["<C-l>"] = cmp.mapping(function()
                     if luasnip.expand_or_locally_jumpable() then
                         luasnip.expand_or_jump()
