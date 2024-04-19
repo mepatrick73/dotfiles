@@ -243,9 +243,9 @@ bindsym Print exec maim -s -u | xclip -selection clipboard -t image/png -i
 # Define colors variables:
 # bg tab mode
 set $color1     #1d2021
-set $color2     #d8a657
-set $color3     #fabd3f
-set $color4     #928374
+set $color2     #a89984
+set $color3     #80aa9e
+set $color4     #7c6f64
 
 # define colors for windows:
 #class                          border          bground         text            indicator       child_border
