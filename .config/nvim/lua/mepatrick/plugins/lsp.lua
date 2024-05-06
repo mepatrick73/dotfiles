@@ -72,10 +72,11 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
-                "volar@1.8.27",
-                --"tsserver",
+                --               "volar@1.8.27",
+                "tsserver",
                 "pyright",
                 "clangd",
+                "taplo",
             },
             handlers = {
                 function(server_name) -- default handler
@@ -99,14 +100,14 @@ return {
                         },
                     })
                 end,
-                ["volar"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.volar.setup {
-                        capabilities = capabilities,
-                        on_attach = on_attach,
-                        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
-                    }
-                end,
+                --                ["volar"] = function()
+                --                    local lspconfig = require("lspconfig")
+                --                    lspconfig.volar.setup {
+                --                        capabilities = capabilities,
+                --                        on_attach = on_attach,
+                --                        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
+                --                    }
+                --                end,
                 ["clangd"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.clangd.setup({
