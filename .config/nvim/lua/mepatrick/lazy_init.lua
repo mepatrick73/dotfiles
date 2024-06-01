@@ -15,4 +15,3 @@ require("lazy").setup({
     spec = "mepatrick.plugins",
     change_detection = { notify = false }
 })
-

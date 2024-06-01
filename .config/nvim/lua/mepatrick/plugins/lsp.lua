@@ -1,6 +1,3 @@
-function hello(how are you sir)
-    
-end
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -75,7 +72,7 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
-                --               "volar@1.8.27",
+                "wgsl_analyzer",
                 "tsserver",
                 "pyright",
                 "clangd",
@@ -88,7 +85,6 @@ return {
                         on_attach = on_attach,
                     })
                 end,
-
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup({
@@ -103,14 +99,6 @@ return {
                         },
                     })
                 end,
-                --                ["volar"] = function()
-                --                    local lspconfig = require("lspconfig")
-                --                    lspconfig.volar.setup {
-                --                        capabilities = capabilities,
-                --                        on_attach = on_attach,
-                --                        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
-                --                    }
-                --                end,
                 ["clangd"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.clangd.setup({

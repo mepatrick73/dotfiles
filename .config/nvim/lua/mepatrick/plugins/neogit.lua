@@ -5,6 +5,7 @@ return {
         "sindrets/diffview.nvim", -- optional - Diff integration
 
         -- Only one of these is needed, not both.
+        -- asdasd
         "nvim-telescope/telescope.nvim", -- optional
     },
     config = function()
