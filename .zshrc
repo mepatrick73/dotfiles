@@ -112,3 +112,8 @@ alias lg="lazygit"
 
 export PATH=$PATH:~/scripts
 export PATH=/usr/local/cuda-12.4/bin${PATH:+:${PATH}}
+
+export LIBTORCH_HOME=/opt/libtorch
+export LIBTORCH=/opt/libtorch
+export LD_LIBRARY_PATH=${LIBTORCH_HOME}/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64

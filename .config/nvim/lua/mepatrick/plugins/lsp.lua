@@ -106,6 +106,16 @@ return {
                         on_attach = on_attach,
                     })
                 end,
+                ["rust_analyzer"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.rust_analyzer.setup({
+                        capabilities = capabilities,
+                        on_attach = on_attach,
+                        root_dir = function(fname)
+                            return lspconfig.util.root_pattern("Cargo.toml")(fname) or lspconfig.util.path.dirname(fname)
+                        end,
+                    })
+                end
             },
         })
 
