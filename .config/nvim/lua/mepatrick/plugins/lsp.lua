@@ -111,6 +111,19 @@ return {
                     lspconfig.rust_analyzer.setup({
                         capabilities = capabilities,
                         on_attach = on_attach,
+                        settings = {
+                            ["rust-analyzer"] = {
+                                cargo = {
+                                    autoreload = true,
+                                },
+                                checkOnSave = {
+                                    command = "clippy",
+                                },
+                                procMacro = {
+                                    enable = true,
+                                },
+                            },
+                        },
                         root_dir = function(fname)
                             return lspconfig.util.root_pattern("Cargo.toml")(fname) or lspconfig.util.path.dirname(fname)
                         end,
