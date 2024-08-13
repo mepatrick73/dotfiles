@@ -26,8 +26,8 @@ return {
             vim.keymap.set("n", "<leader>D", require("telescope.builtin").lsp_type_definitions)
             vim.keymap.set("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols)
             vim.keymap.set("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols)
-            vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next)
-            vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev)
+            vim.keymap.set("n", "<C-]>", vim.diagnostic.goto_next)
+            vim.keymap.set("n", "<C-[>", vim.diagnostic.goto_prev)
             vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>")
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover)
@@ -174,6 +174,7 @@ return {
 
         vim.diagnostic.config({
             -- update_in_insert = true,
+            virtual_text = false,
             float = {
                 focusable = false,
                 style = "minimal",
