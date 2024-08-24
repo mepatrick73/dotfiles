@@ -116,9 +116,9 @@ return {
                                 cargo = {
                                     autoreload = true,
                                 },
-                                checkOnSave = {
-                                    command = "clippy",
-                                },
+                                --checkOnSave = {
+                                --    command = "clippy",
+                                --},
                                 procMacro = {
                                     enable = true,
                                 },
