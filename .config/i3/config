@@ -185,7 +185,7 @@ assign [class="discord"] $ws3
 #startup applications
 exec --no-startup-id alacritty --title mainTerm
 exec --no-startup-id firefox
-exec --no-startup-id Discord
+exec --no-startup-id vesktop
 exec --no-startup-id google-chrome
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom
