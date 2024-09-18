@@ -235,6 +235,9 @@ bar {
 
 # Screenshot
 bindsym Print exec maim -s -u | xclip -selection clipboard -t image/png -i
+bindsym Shift+Print exec sh -c 'FILE=~/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png && maim -s -u $FILE && xclip -selection clipboard -t image/png -i $FILE'
+
+
 
 
 ######################################

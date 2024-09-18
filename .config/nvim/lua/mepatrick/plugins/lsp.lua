@@ -119,6 +119,9 @@ return {
                                 --checkOnSave = {
                                 --    command = "clippy",
                                 --},
+                                checkOnSave = {
+                                    extraArgs = { "--target-dir", "/tmp/rust-analyzer-check" }
+                                },
                                 procMacro = {
                                     enable = true,
                                 },
