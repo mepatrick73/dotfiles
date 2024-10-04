@@ -21,6 +21,7 @@ map Q gq
 Plug 'machakann/vim-highlightedyank'
 " Commentary plugin
 Plug 'tpope/vim-commentary'
+set NERDTree
 
 
 " Disable GUI cursor
@@ -115,6 +116,8 @@ nmap <C-l> :action GotoHarpoon4<CR>
 nmap <C-]> :action GotoNextError<CR>
 nmap <C-[> :action GotoPreviousError<CR>
 nmap <leader>k :action ShowErrorDescription<CR>
+nmap <C-t> :NERDTreeToggle<CR>
+nmap <leader>n :NERDTreeFocus<CR>
 
 
 
