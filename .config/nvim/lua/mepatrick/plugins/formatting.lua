@@ -7,8 +7,6 @@ return {
             formatters_by_ft = {
                 python = { "autopep8" },
                 javascript = { { "prettierd", "prettier" } },
-                cpp = { "clang-format" },
-                h = { "clang-format" }
             },
             format_on_save = {
                 lsp_fallback = true,

@@ -63,9 +63,15 @@ exec --no-startup-id xset r rate 300 40
 # Use wpctl to adjust volume in pipewire.
 set $refresh_i3status killall -SIGUSR1 i3status
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume -l 1.2 @DEFAULT_SINK@ 10%+ && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume -l 1.2 @DEFAULT_SINK@ 10%- && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+# Increase volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+
+# Decrease volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+
+# Mute/Unmute audio
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod

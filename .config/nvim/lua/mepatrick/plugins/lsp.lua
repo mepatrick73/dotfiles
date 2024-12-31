@@ -5,18 +5,12 @@ return {
         "williamboman/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         "j-hui/fidget.nvim",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
-        "hrsh7th/nvim-cmp",
-        "L3MON4D3/LuaSnip",
-        "saadparwaiz1/cmp_luasnip",
+        'saghen/blink.cmp',
     },
     config = function()
         local on_attach = function(_, bufnr)
             vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
-            vim.keymap.set("n", "<leader>ca", function()
+            vim.keymap.set({ "v", "n" }, "<leader>ca", function()
                 vim.lsp.buf.code_action({ context = { only = { "quickfix", "refactor", "source" } } })
             end)
 
@@ -32,6 +26,7 @@ return {
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover)
             vim.keymap.set("i", "<C-;>", vim.lsp.buf.signature_help)
+
             -- Lesser used LSP functionality
 
             vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
@@ -46,15 +41,14 @@ return {
                 vim.lsp.buf.format()
             end, { desc = "Format current buffer with LSP" })
         end
-        local cmp = require("cmp")
-        local cmp_lsp = require("cmp_nvim_lsp")
+        local blink_capabilities = require('blink.cmp').get_lsp_capabilities();
         local capabilities = vim.tbl_deep_extend(
             "force",
             {},
             vim.lsp.protocol.make_client_capabilities(),
-            cmp_lsp.default_capabilities()
+            blink_capabilities
         )
-        local luasnip = require("luasnip")
+
         require("fidget").setup({})
         require("mason").setup({})
         require("mason-tool-installer").setup({
@@ -65,7 +59,7 @@ return {
                 "stylua",
                 "prettierd",
                 "autopep8",
-                "clang-format",
+                --"clang-format",
             },
         })
         require("mason-lspconfig").setup({
@@ -104,6 +98,10 @@ return {
                     lspconfig.clangd.setup({
                         capabilities = capabilities,
                         on_attach = on_attach,
+                        cmd = {
+                            "clangd",
+                            "--fallback-style=WebKit"
+                        },
                     })
                 end,
                 ["rust_analyzer"] = function()
@@ -135,44 +133,6 @@ return {
             },
         })
 
-        cmp.setup({
-            snippet = {
-                expand = function(args)
-                    require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-                end,
-            },
-            mapping = cmp.mapping.preset.insert({
-                ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-                ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                ["<C-Space>"] = cmp.mapping.complete({}),
-                ["<C-i>"] = cmp.mapping.confirm({ select = true }),
-                ["<C-n>"] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.select_next_item()
-                    elseif luasnip.expand_or_jumpable() then
-                        luasnip.expand_or_jump()
-                    else
-                        fallback()
-                    end
-                end, { "i", "s" }),
-                ["<C-p>"] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.select_prev_item()
-                    elseif luasnip.jumpable(-1) then
-                        luasnip.jump(-1)
-                    else
-                        fallback()
-                    end
-                end, { "i", "s" }),
-            }),
-            sources = cmp.config.sources({
-                --{ name = 'nvim_lsp_signature_help' },
-                { name = "nvim_lsp" },
-                { name = "luasnip" }, -- For luasnip users.
-            }, {
-                { name = "buffer" },
-            }),
-        })
 
         vim.diagnostic.config({
             -- update_in_insert = true,
