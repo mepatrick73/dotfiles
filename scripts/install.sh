@@ -7,6 +7,7 @@ sudo dnf install alacritty
 sudo dnf install fzf
 sudo dnf install stow
 sudo dnf install socat
+sudo dnf install wofi
 
 # Python + packages for wallpaper generation
 sudo dnf install python3 python3-pip
