@@ -30,6 +30,7 @@ lines = [
 ]
 
 x_offset = 0
+vertical_monitor = None
 for m in monitors:
     name      = m["name"]
     w         = m["width"]
@@ -41,10 +42,19 @@ for m in monitors:
     line = f"monitor={name},{w}x{h}@{refresh},{x_offset}x0,{scale}"
     if transform:
         line += f",transform,{transform}"
+        vertical_monitor = name
     lines.append(line)
     lines.append("")
 
     x_offset += w
+
+if vertical_monitor:
+    lines += [
+        f"# Pin workspaces 9 and 10 to the vertical monitor ({vertical_monitor})",
+        f"workspace=9,monitor:{vertical_monitor}",
+        f"workspace=10,monitor:{vertical_monitor},default:true",
+        "",
+    ]
 
 conf_path = os.path.expanduser("~/.config/hypr/monitor.conf")
 content = "\n".join(lines)
