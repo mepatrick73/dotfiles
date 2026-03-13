@@ -28,12 +28,16 @@ for m in monitors:
 
     wp_file = os.path.join(hypr_dir, f"wallpaper-{w}x{h}.jpg")
 
-    if (w, h) not in generated:
-        print(f"Generating {w}x{h} wallpaper for {name}...", flush=True)
+    transform = m.get("transform", 0)
+    key = (w, h, transform)
+
+    if key not in generated:
+        print(f"Generating {w}x{h} transform={transform} wallpaper for {name}...", flush=True)
         subprocess.run([sys.executable, gen_script,
                         "--width", str(w), "--height", str(h),
+                        "--transform", str(transform),
                         "--output", wp_file], check=True)
-        generated.add((w, h))
+        generated.add(key)
 
     preloads.append(f"preload = {wp_file}")
     wallpapers.append(f"wallpaper = {name},{wp_file}")
