@@ -46,7 +46,7 @@ periodic_watchdog &
 PERIODIC_PID=$!
 
 # Watch config/style for changes and reload
-while inotifywait -e close_write "$CONFIG" "$STYLE"; do
+while inotifywait -e close_write -e moved_to "$CONFIG" "$STYLE"; do
     restart_waybar
 done
 
