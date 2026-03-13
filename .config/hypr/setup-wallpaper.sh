@@ -48,6 +48,13 @@ with open(os.path.join(hypr_dir, "hyprpaper.conf"), "w") as f:
 print("hyprpaper.conf written.")
 EOF
 
+# Generate lockscreen GIF if it doesn't exist
+LOCKSCREEN="$HYPR_DIR/lockscreen.gif"
+if [ ! -f "$LOCKSCREEN" ]; then
+    echo "Generating lockscreen animation..."
+    python3 "$HOME/dotfiles/scripts/gen-lockscreen.py" --output "$LOCKSCREEN"
+fi
+
 # Start hyprpaper
 pkill -x hyprpaper 2>/dev/null
 sleep 0.3
