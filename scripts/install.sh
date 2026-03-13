@@ -17,7 +17,7 @@ sudo systemctl enable sddm
 sudo dnf install -y hyprpolkitagent
 
 # --- Bar, launcher, terminal, notifications ---
-sudo dnf install -y waybar wofi alacritty mako
+sudo dnf install -y waybar wofi alacritty mako network-manager-applet
 
 # --- Screenshots ---
 # grimshot wraps grim + slurp and is bound to Print in hyprland.conf
