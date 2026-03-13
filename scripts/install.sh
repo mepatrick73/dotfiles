@@ -42,6 +42,19 @@ fi
 # --- Utilities ---
 sudo dnf install -y btop tmux fzf stow socat wdisplays
 
+# --- Shell ---
+sudo dnf install -y fish
+if [ "$SHELL" != "$(which fish)" ]; then
+    chsh -s "$(which fish)"
+fi
+
+# --- Google Chrome ---
+if ! command -v google-chrome &>/dev/null; then
+    sudo dnf install -y fedora-workstation-repositories
+    sudo dnf config-manager --set-enabled google-chrome
+    sudo dnf install -y google-chrome-stable
+fi
+
 # --- Python + wallpaper generation ---
 sudo dnf install -y python3 python3-pip
 pip3 install --user numpy matplotlib
