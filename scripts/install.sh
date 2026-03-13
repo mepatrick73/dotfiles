@@ -29,6 +29,16 @@ sudo dnf install -y brightnessctl playerctl
 # --- Fonts ---
 sudo dnf install -y google-noto-sans-mono-fonts fontawesome-6-free-fonts
 
+# FiraMono Nerd Font (used in alacritty) — not in Fedora repos, install manually
+if ! fc-list | grep -q "FiraMono Nerd Font"; then
+    FIRA_VERSION="3.3.0"
+    mkdir -p ~/.local/share/fonts/FiraMono
+    curl -L "https://github.com/ryanoasis/nerd-fonts/releases/download/v${FIRA_VERSION}/FiraMono.zip" -o /tmp/FiraMono.zip
+    unzip -o /tmp/FiraMono.zip -d ~/.local/share/fonts/FiraMono
+    rm /tmp/FiraMono.zip
+    fc-cache -f
+fi
+
 # --- Utilities ---
 sudo dnf install -y btop tmux fzf stow socat wdisplays
 
