@@ -175,7 +175,7 @@ label:focus {
 }
 
 #tray > .needs-attention {
-    -gtk-icon-effect: highlight;
+    -gtk-icon-effect: none;
     background-color: #eb4d4b;
 }
 
