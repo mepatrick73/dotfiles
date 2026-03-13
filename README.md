@@ -58,13 +58,20 @@ stow --target=$HOME .
 
 ### 3. Set up monitors
 
-Run this once on a new machine to generate an initial `monitor.conf`:
+Launch `wdisplays` to visually arrange monitors, set resolutions, refresh rates, and rotations:
+
+```bash
+wdisplays
+```
+
+Apply the layout in the GUI, then run `setup-monitors.sh` to make it permanent:
 
 ```bash
 bash scripts/setup-monitors.sh
+hyprctl reload
 ```
 
-Then edit `.config/hypr/monitor.conf` to fine-tune offsets, refresh rates, and transforms. Reload with `hyprctl reload`.
+This reads the live monitor state from Hyprland and writes `~/.config/hypr/monitor.conf`, including workspace pinning rules for any rotated (vertical) monitor.
 
 ### 4. Log in to Hyprland
 
