@@ -41,7 +41,19 @@ dotfiles/
 
 ## Fresh Install
 
-### 1. Install dependencies
+### 1. Clone with submodules
+
+```bash
+git clone --recurse-submodules https://github.com/mepatrick73/dotfiles.git ~/dotfiles
+```
+
+If you already cloned without `--recurse-submodules`:
+
+```bash
+git submodule update --init
+```
+
+### 2. Install dependencies
 
 ```bash
 bash scripts/install.sh
@@ -49,14 +61,14 @@ bash scripts/install.sh
 
 This installs: waybar, wofi, alacritty, mako, btop, tmux, fzf, socat, stow, hyprpaper, python3, numpy, matplotlib.
 
-### 2. Stow dotfiles
+### 3. Stow dotfiles
 
 ```bash
 cd ~/dotfiles
 stow --target=$HOME .
 ```
 
-### 3. Set up monitors
+### 4. Set up monitors
 
 Launch `wdisplays` to visually arrange monitors, set resolutions, refresh rates, and rotations:
 
@@ -73,9 +85,17 @@ hyprctl reload
 
 This reads the live monitor state from Hyprland and writes `~/.config/hypr/monitor.conf`, including workspace pinning rules for any rotated (vertical) monitor.
 
-### 4. Log in to Hyprland
+### 5. Log in to Hyprland
 
 Wallpapers are generated automatically at login via `setup-wallpaper.sh`. Portrait and landscape monitors each get a layout-appropriate render.
+
+## Keeping up to date
+
+Pull dotfiles and update the nvim submodule together:
+
+```bash
+git pull && git submodule update --remote
+```
 
 ## Waybar
 
