@@ -7,7 +7,7 @@ set -e
 dnf copr list --enabled | grep -q "solopasha/hyprland" || sudo dnf copr enable -y solopasha/hyprland
 
 # --- Hyprland + ecosystem ---
-sudo dnf install -y hyprland hyprpaper xdg-desktop-portal-hyprland
+sudo dnf install -y hyprland hyprpaper xdg-desktop-portal-hyprland hyprlock
 
 # --- Login manager ---
 sudo dnf install -y sddm
