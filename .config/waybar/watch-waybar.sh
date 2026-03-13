@@ -46,8 +46,13 @@ periodic_watchdog &
 PERIODIC_PID=$!
 
 # Watch config/style for changes and reload
-while inotifywait -e close_write -e moved_to "$CONFIG" "$STYLE"; do
-    restart_waybar
+# Watch the directory (not files) so inode replacements don't break the watch
+DIR=$(dirname "$CONFIG")
+while true; do
+    event=$(inotifywait -e close_write -e moved_to --format '%f' "$DIR" 2>/dev/null)
+    if [[ "$event" == "config.jsonc" ]] || [[ "$event" == "style.css" ]]; then
+        restart_waybar
+    fi
 done
 
 # Cleanup on exit
