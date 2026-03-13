@@ -7,11 +7,13 @@ Hyprland-based Wayland desktop configuration for Fedora Linux. Dark minimal aest
 | Tool | Purpose |
 |------|---------|
 | [Hyprland](https://hyprland.org/) | Wayland compositor |
+| [SDDM](https://github.com/sddm/sddm) | Login manager |
 | [Waybar](https://github.com/Alexays/Waybar) | Status bar |
 | [Wofi](https://hg.sr.ht/~scoopta/wofi) | App launcher (drun) |
 | [Alacritty](https://alacritty.org/) | Terminal emulator |
 | [Mako](https://github.com/emersion/mako) | Notification daemon |
 | [Hyprpaper](https://github.com/hyprwm/hyprpaper) | Wallpaper daemon |
+| [grimshot](https://github.com/OctopusET/sway-contrib) | Screenshots |
 | [btop](https://github.com/aristocratsoftware/btop) | System monitor |
 
 ## Layout
@@ -41,6 +43,23 @@ dotfiles/
 
 ## Fresh Install
 
+### 0. Upgrade Fedora to latest stable
+
+Check the current latest stable release at [fedoraproject.org](https://fedoraproject.org/) and replace `XX` below:
+
+```bash
+sudo dnf upgrade --refresh
+sudo dnf install dnf-plugin-system-upgrade
+sudo dnf system-upgrade download --releasever=XX
+sudo dnf system-upgrade reboot
+```
+
+If coming from KDE Plasma, you can remove it after confirming Hyprland works:
+
+```bash
+sudo dnf group remove "KDE Plasma Workspaces"
+```
+
 ### 1. Clone with submodules
 
 ```bash
@@ -59,7 +78,7 @@ git submodule update --init
 bash scripts/install.sh
 ```
 
-This installs: waybar, wofi, alacritty, mako, btop, tmux, fzf, socat, stow, hyprpaper, python3, numpy, matplotlib.
+This installs: hyprland, hyprpaper, xdg-desktop-portal-hyprland, sddm, polkit-gnome, waybar, wofi, alacritty, mako, grim, slurp, grimshot, brightnessctl, playerctl, Noto Sans Mono, Font Awesome 6, btop, tmux, fzf, stow, socat, wdisplays, python3, numpy, matplotlib.
 
 ### 3. Stow dotfiles
 
@@ -86,6 +105,8 @@ hyprctl reload
 This reads the live monitor state from Hyprland and writes `~/.config/hypr/monitor.conf`, including workspace pinning rules for any rotated (vertical) monitor.
 
 ### 5. Log in to Hyprland
+
+`install.sh` enables SDDM automatically. Reboot, select **Hyprland** from the SDDM session menu, and log in.
 
 Wallpapers are generated automatically at login via `setup-wallpaper.sh`. Portrait and landscape monitors each get a layout-appropriate render.
 
