@@ -12,7 +12,7 @@
         "sway/scratchpad"
     ],
     "modules-center": [
-        "sway/window"
+        "hyprland/window"
     ],
     "modules-right": [
         "idle_inhibitor",
