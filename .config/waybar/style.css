@@ -171,7 +171,7 @@ label:focus {
 }
 
 #tray > .passive {
-    -gtk-icon-effect: dim;
+    -gtk-icon-effect: none;
 }
 
 #tray > .needs-attention {
