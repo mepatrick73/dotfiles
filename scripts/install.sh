@@ -50,8 +50,7 @@ fi
 
 # --- Google Chrome ---
 if ! command -v google-chrome &>/dev/null; then
-    sudo dnf install -y fedora-workstation-repositories
-    sudo dnf config-manager --set-enabled google-chrome
+    sudo dnf config-manager addrepo --from-repofile=https://dl.google.com/linux/chrome/rpm/stable/x86_64/google-chrome.repo
     sudo dnf install -y google-chrome-stable
 fi
 
