@@ -48,11 +48,6 @@ if [ "$SHELL" != "$(which fish)" ]; then
     chsh -s "$(which fish)"
 fi
 
-# --- Google Chrome ---
-if ! command -v google-chrome &>/dev/null; then
-    sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub
-    sudo dnf install -y https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-fi
 
 # --- Python + wallpaper generation ---
 sudo dnf install -y python3 python3-pip
