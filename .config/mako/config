@@ -1,0 +1,19 @@
+font=Noto Sans Mono 13
+background-color=#08080aee
+text-color=#c0c8d0
+border-color=#ffffff10
+border-size=1
+border-radius=8
+padding=10
+margin=8
+width=300
+height=100
+anchor=top-right
+
+[urgency=low]
+text-color=#606878
+border-color=#ffffff08
+
+[urgency=critical]
+text-color=#f53c3c
+border-color=#f53c3c30
