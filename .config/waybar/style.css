@@ -138,6 +138,14 @@ label:focus {
     color: #f53c3c;
 }
 
+#network.wifi {
+    color: #c0c8d0;
+}
+
+#network.ethernet {
+    color: #c0c8d0;
+}
+
 #pulseaudio.muted {
     color: #606878;
 }
