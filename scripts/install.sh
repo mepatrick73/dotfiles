@@ -14,7 +14,7 @@ sudo dnf install -y sddm
 sudo systemctl enable sddm
 
 # --- Polkit agent (privilege prompts: mounting, sudo GUIs, etc.) ---
-sudo dnf install -y polkit-gnome
+sudo dnf install -y hyprpolkitagent
 
 # --- Bar, launcher, terminal, notifications ---
 sudo dnf install -y waybar wofi alacritty mako
