@@ -45,6 +45,7 @@
         "spacing": 10
     },
     "clock": {
+        "interval": 1,
         "format": "{:%a %d %b  %H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d %H:%M:%S}"
@@ -102,10 +103,11 @@
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
         "format-bluetooth": "{volume}% \uf293 {format_source}",
-        "format-bluetooth-muted": "\uf293 {format_source}",
+        "format-bluetooth-muted": "\uf026 \uf293 {format_source}",
         "format-muted": "\uf026 {format_source}",
-        "format-source": "{volume}% \uf130",
-        "format-source-muted": "\uf131",
+        "format-source": "\uf130",
+        "format-source-muted": "",
+        "tooltip-format": "{desc} — {volume}%",
         "format-icons": {
             "headphone": "\uf025",
             "hands-free": "\uf590",
