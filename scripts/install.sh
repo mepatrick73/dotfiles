@@ -50,7 +50,7 @@ fi
 
 # --- Google Chrome ---
 if ! command -v google-chrome &>/dev/null; then
-    sudo dnf config-manager addrepo --from-repofile=https://dl.google.com/linux/chrome/rpm/stable/x86_64/google-chrome.repo
+    sudo curl -o /etc/yum.repos.d/google-chrome.repo https://dl.google.com/linux/chrome/rpm/stable/x86_64/google-chrome.repo
     sudo dnf install -y google-chrome-stable
 fi
 
