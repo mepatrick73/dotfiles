@@ -2,8 +2,12 @@
 # Install all dependencies for the Hyprland dotfiles setup (Fedora)
 set -e
 
+# --- Hyprland COPR ---
+# Provides: hyprland, hyprpaper, xdg-desktop-portal-hyprland, and ecosystem packages
+dnf copr list --enabled | grep -q "solopasha/hyprland" || sudo dnf copr enable -y solopasha/hyprland
+
 # --- Hyprland + ecosystem ---
-sudo dnf install -y hyprland xdg-desktop-portal-hyprland
+sudo dnf install -y hyprland hyprpaper xdg-desktop-portal-hyprland
 
 # --- Login manager ---
 sudo dnf install -y sddm
