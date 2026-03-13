@@ -50,8 +50,8 @@ fi
 
 # --- Google Chrome ---
 if ! command -v google-chrome &>/dev/null; then
-    sudo curl -o /etc/yum.repos.d/google-chrome.repo https://dl.google.com/linux/chrome/rpm/stable/x86_64/google-chrome.repo
-    sudo dnf install -y google-chrome-stable
+    sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub
+    sudo dnf install -y https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 fi
 
 # --- Python + wallpaper generation ---
