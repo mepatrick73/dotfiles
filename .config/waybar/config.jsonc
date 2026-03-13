@@ -66,14 +66,17 @@
     },
     "battery": {
         "states": {
+            "full": 100,
+            "good": 80,
             "warning": 30,
             "critical": 15
         },
         "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
+        "format-full": "\uf240",
         "format-charging": "{capacity}% \uf0e7",
         "format-plugged": "{capacity}% \uf1e6",
         "format-alt": "{time} {icon}",
+        "tooltip-format": "{timeTo}",
         "format-icons": ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"]
     },
     "power-profiles-daemon": {

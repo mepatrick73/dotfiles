@@ -95,8 +95,20 @@ button:hover {
     margin-right: 0;
 }
 
+#battery.full {
+    color: #c0c8d0;
+}
+
+#battery.good {
+    color: #c0c8d0;
+}
+
+#battery.warning {
+    color: #e5a50a;
+}
+
 #battery.charging, #battery.plugged {
-    color: #ffffff;
+    color: #2ecc71;
 }
 
 @keyframes blink {
