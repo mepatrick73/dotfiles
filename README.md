@@ -8,12 +8,15 @@ Hyprland-based Wayland desktop configuration for Fedora Linux. Dark minimal aest
 |------|---------|
 | [Hyprland](https://hyprland.org/) | Wayland compositor |
 | [SDDM](https://github.com/sddm/sddm) | Login manager |
+| [hyprlock](https://github.com/hyprwm/hyprlock) | Screen locker |
 | [Waybar](https://github.com/Alexays/Waybar) | Status bar |
 | [Wofi](https://hg.sr.ht/~scoopta/wofi) | App launcher (drun) |
 | [Alacritty](https://alacritty.org/) | Terminal emulator |
+| [Fish](https://fishshell.com/) | Shell |
 | [Mako](https://github.com/emersion/mako) | Notification daemon |
 | [Hyprpaper](https://github.com/hyprwm/hyprpaper) | Wallpaper daemon |
 | [grimshot](https://github.com/OctopusET/sway-contrib) | Screenshots |
+| [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/) | Volume mixer (waybar click) |
 | [btop](https://github.com/aristocratsoftware/btop) | System monitor |
 
 ## Layout
@@ -23,6 +26,7 @@ dotfiles/
 ├── .config/
 │   ├── hypr/
 │   │   ├── hyprland.conf       # Main Hyprland config
+│   │   ├── hyprlock.conf       # Lock screen layout and style
 │   │   ├── monitor.conf        # Monitor layout (machine-specific)
 │   │   ├── setup-wallpaper.sh  # Generates per-monitor wallpapers at login
 │   │   └── keybinds.conf
@@ -78,7 +82,7 @@ git submodule update --init
 bash scripts/install.sh
 ```
 
-This installs: hyprland, hyprpaper, xdg-desktop-portal-hyprland, sddm, polkit-gnome, waybar, wofi, alacritty, mako, grim, slurp, grimshot, brightnessctl, playerctl, Noto Sans Mono, Font Awesome 6, btop, tmux, fzf, stow, socat, wdisplays, python3, numpy, matplotlib.
+This installs: hyprland, hyprpaper, hyprlock, xdg-desktop-portal-hyprland, sddm, hyprpolkitagent, gnome-keyring, waybar, wofi, alacritty, mako, network-manager-applet, pavucontrol, grim, slurp, grimshot, brightnessctl, playerctl, Noto Sans Mono, Font Awesome 6, FiraMono Nerd Font, fish, btop, tmux, fzf, stow, socat, wdisplays, python3, numpy, matplotlib.
 
 ### 3. Stow dotfiles
 
@@ -138,8 +142,15 @@ To regenerate manually:
 bash ~/.config/hypr/setup-wallpaper.sh
 ```
 
+## Lock screen
+
+Lock with `ALT+L`. The lock screen shows a clock and date. `hyprlock.conf` controls layout and colors.
+
 ## Notes
 
 - `monitor.conf` is machine-specific — edit it after running `setup-monitors.sh`
 - Wallpaper JPGs and `hyprpaper.conf` are gitignored (auto-generated at login)
 - Icons use Font Awesome 6 Free unicode codepoints (not nerd fonts)
+- FiraMono Nerd Font is auto-installed by `install.sh` (not in Fedora repos)
+- Google Chrome is not in `install.sh` — install manually from the Chrome website
+- NVIDIA users: `hyprland.conf` includes the required env vars (`GBM_BACKEND`, `NVD_BACKEND`, `WLR_NO_HARDWARE_CURSORS`)
