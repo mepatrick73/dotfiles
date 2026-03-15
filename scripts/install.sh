@@ -11,6 +11,7 @@ sudo dnf install -y hyprland hyprpaper xdg-desktop-portal-hyprland hyprlock
 
 # --- Login manager ---
 sudo dnf install -y sddm
+sudo systemctl disable gdm lightdm 2>/dev/null || true
 sudo systemctl enable sddm
 
 # --- Polkit agent (privilege prompts: mounting, sudo GUIs, etc.) ---
