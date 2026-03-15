@@ -16,8 +16,14 @@ sudo systemctl enable sddm
 # --- Polkit agent (privilege prompts: mounting, sudo GUIs, etc.) ---
 sudo dnf install -y hyprpolkitagent
 
+# --- Keyring (auto-unlocks wifi/secrets on login so NM doesn't prompt each time) ---
+sudo dnf install -y gnome-keyring libsecret
+
 # --- Bar, launcher, terminal, notifications ---
 sudo dnf install -y waybar wofi alacritty mako network-manager-applet
+
+# --- Volume mixer (waybar pulseaudio widget on-click) ---
+sudo dnf install -y pavucontrol
 
 # --- Screenshots ---
 # grimshot wraps grim + slurp and is bound to Print in hyprland.conf
