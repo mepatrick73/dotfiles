@@ -124,6 +124,40 @@ bash scripts/setup-snapshots.sh
 
 Wallpapers are generated automatically at login via `setup-wallpaper.sh`. Portrait and landscape monitors each get a layout-appropriate render.
 
+## Snapshots & recovery
+
+Snapshots are taken automatically by snapper — on a timeline (hourly/daily/weekly) and before/after every `dnf` transaction.
+
+### Browsing snapshots
+
+```bash
+snapper -c root list    # system snapshots
+snapper -c home list    # home snapshots
+```
+
+### System still boots — roll back files
+
+```bash
+# roll back specific files to snapshot N
+snapper -c root undochange N..0 /etc/some/file
+
+# roll back everything to snapshot N
+snapper -c root undochange N..0
+```
+
+### System won't boot — recover from GRUB
+
+1. Reboot and select **Btrfs snapshots** in the GRUB menu
+2. Boot into the snapshot you want to restore
+3. Verify everything works, then make it permanent:
+
+```bash
+sudo snapper -c root rollback N
+sudo reboot
+```
+
+The GRUB menu is kept up to date automatically by `grub-btrfsd` whenever a new snapshot is created.
+
 ## Keeping up to date
 
 Pull dotfiles and update the nvim submodule together:
