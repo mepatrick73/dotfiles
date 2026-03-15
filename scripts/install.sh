@@ -4,7 +4,7 @@ set -e
 
 # --- Hyprland COPR ---
 # Provides: hyprland, hyprpaper, xdg-desktop-portal-hyprland, and ecosystem packages
-dnf copr list --enabled | grep -q "solopasha/hyprland" || sudo dnf copr enable -y solopasha/hyprland
+ls /etc/yum.repos.d/ | grep -q "solopasha-hyprland" || sudo dnf copr enable -y solopasha/hyprland
 
 # --- Hyprland + ecosystem ---
 sudo dnf install -y hyprland hyprpaper xdg-desktop-portal-hyprland hyprlock
