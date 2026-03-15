@@ -144,7 +144,7 @@ bash ~/.config/hypr/setup-wallpaper.sh
 
 ## Lock screen
 
-Lock with `ALT+L`. The lock screen shows a clock and date. `hyprlock.conf` controls layout and colors.
+Lock with `CTRL+ALT+L`. The lock screen shows a clock and date. `hyprlock.conf` controls layout and colors.
 
 ## Notes
 
