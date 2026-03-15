@@ -17,6 +17,7 @@ Hyprland-based Wayland desktop configuration for Fedora Linux. Dark minimal aest
 | [Hyprpaper](https://github.com/hyprwm/hyprpaper) | Wallpaper daemon |
 | [grimshot](https://github.com/OctopusET/sway-contrib) | Screenshots |
 | [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/) | Volume mixer (waybar click) |
+| [Blueman](https://github.com/blueman-project/blueman) | Bluetooth manager (waybar click) |
 | [btop](https://github.com/aristocratsoftware/btop) | System monitor |
 
 ## Layout
@@ -82,7 +83,7 @@ git submodule update --init
 bash scripts/install.sh
 ```
 
-This installs: hyprland, hyprpaper, hyprlock, xdg-desktop-portal-hyprland, sddm, hyprpolkitagent, gnome-keyring, waybar, wofi, alacritty, mako, network-manager-applet, pavucontrol, grim, slurp, grimshot, brightnessctl, playerctl, Noto Sans Mono, Font Awesome 6, FiraMono Nerd Font, fish, btop, tmux, fzf, stow, socat, wdisplays, python3, numpy, matplotlib.
+This installs: hyprland, hyprpaper, hyprlock, xdg-desktop-portal-hyprland, sddm, hyprpolkitagent, gnome-keyring, waybar, wofi, alacritty, mako, network-manager-applet, pavucontrol, blueman, grim, slurp, grimshot, brightnessctl, playerctl, Noto Sans Mono, Font Awesome 6, FiraMono Nerd Font, fish, btop, tmux, fzf, stow, socat, wdisplays, python3, numpy, matplotlib.
 
 ### 3. Stow dotfiles
 

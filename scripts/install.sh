@@ -25,6 +25,9 @@ sudo dnf install -y waybar wofi alacritty mako network-manager-applet
 # --- Volume mixer (waybar pulseaudio widget on-click) ---
 sudo dnf install -y pavucontrol
 
+# --- Bluetooth manager (waybar bluetooth widget on-click) ---
+sudo dnf install -y blueman
+
 # --- Screenshots ---
 # grimshot wraps grim + slurp and is bound to Print in hyprland.conf
 sudo dnf install -y grim slurp grimshot
