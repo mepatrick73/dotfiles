@@ -42,6 +42,7 @@ dotfiles/
 │       └── alacritty.toml      # Terminal config (FiraMono Nerd Font, gruvbox)
 └── scripts/
     ├── install.sh              # Install all dependencies (Fedora/DNF)
+    ├── setup-snapshots.sh      # Configure btrfs snapshots via snapper
     ├── gen-wallpaper.py        # Generate wireframe topology wallpaper
     └── setup-monitors.sh       # Bootstrap monitor.conf on a new machine
 ```
@@ -109,7 +110,15 @@ hyprctl reload
 
 This reads the live monitor state from Hyprland and writes `~/.config/hypr/monitor.conf`, including workspace pinning rules for any rotated (vertical) monitor.
 
-### 5. Log in to Hyprland
+### 5. Set up btrfs snapshots (optional)
+
+Configures snapper to snapshot `/` and `/home`, with DNF pre/post integration and scheduled timeline cleanup:
+
+```bash
+bash scripts/setup-snapshots.sh
+```
+
+### 6. Log in to Hyprland
 
 `install.sh` enables SDDM automatically. Reboot, select **Hyprland** from the SDDM session menu, and log in.
 
