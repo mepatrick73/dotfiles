@@ -30,11 +30,12 @@ dotfiles/
 │   │   ├── hyprlock.conf       # Lock screen layout and style
 │   │   ├── monitor.conf        # Monitor layout (machine-specific)
 │   │   ├── setup-wallpaper.sh  # Generates per-monitor wallpapers at login
+│   │   ├── power-menu.sh       # Wofi power menu (lock/logout/suspend/reboot/shutdown)
 │   │   └── keybinds.conf
 │   ├── waybar/
 │   │   ├── config.jsonc        # Bar modules and layout
 │   │   ├── style.css           # Dark slate theme
-│   │   └── watch-waybar.sh     # Auto-reload on config save + crash watchdog
+│   │   └── watch-waybar.sh     # Auto-reload on config save + ping/pong health check
 │   ├── wofi/
 │   │   ├── config              # Launcher settings
 │   │   └── style.css           # Matches waybar theme
@@ -168,13 +169,21 @@ git pull && git submodule update --remote
 
 ## Waybar
 
-The bar auto-reloads when `config.jsonc` or `style.css` is saved — no manual restart needed. A watchdog also restarts waybar if it hangs or crashes.
+The bar auto-reloads when `config.jsonc` or `style.css` is saved — no manual restart needed.
+
+`watch-waybar.sh` keeps waybar alive using a ping/pong health check: every 15 seconds it sends `SIGRTMIN+8` to the waybar process. A hidden `custom/healthcheck` module is configured to respond to that signal by writing to `/tmp/waybar-pong`. If no pong arrives within 5 seconds, waybar is considered frozen and is restarted. This catches both crashes and frozen-but-running processes.
+
+Signal `SIGRTMIN+8` is reserved for this health check — don't assign it to any other custom module.
 
 To start the watcher manually (it runs automatically via `exec-once` in hyprland.conf):
 
 ```bash
 ~/.config/waybar/watch-waybar.sh &
 ```
+
+## Power menu
+
+`mod+shift+R` opens a wofi menu with session actions: Lock, Logout, Suspend, Reboot, Shutdown.
 
 ## Wallpaper
 
