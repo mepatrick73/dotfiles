@@ -21,6 +21,21 @@
       - fzf
       - stow
       - socat
+      - gh
     state: present
   become: true
   tags: [shell, utilities]
+
+- name: Check GitHub CLI auth status
+  command: gh auth status
+  register: gh_auth
+  changed_when: false
+  failed_when: false
+  check_mode: false
+  tags: [shell, gh]
+
+- name: Prompt GitHub CLI login
+  debug:
+    msg: "Not logged in to GitHub. Run: gh auth login"
+  when: gh_auth.rc != 0
+  tags: [shell, gh]
