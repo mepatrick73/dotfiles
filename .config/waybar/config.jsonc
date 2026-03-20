@@ -13,7 +13,6 @@
         "hyprland/window"
     ],
     "modules-right": [
-        "custom/healthcheck",
         "idle_inhibitor",
         "bluetooth",
         "pulseaudio",
@@ -27,17 +26,6 @@
         "tray"
     ],
     // Modules configuration
-    //
-    // Signal 8 (SIGRTMIN+8) is reserved for waybar health checks.
-    // watch-waybar.sh sends this signal to ping waybar; this module responds
-    // by writing to /tmp/waybar-pong, proving the process is alive and responsive.
-    "custom/healthcheck": {
-        "exec": "echo pong > /tmp/waybar-pong",
-        "signal": 8,
-        "format": "",
-        "tooltip": false
-    },
-    //
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": false,

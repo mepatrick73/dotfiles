@@ -3,29 +3,24 @@
 # watch-waybar.sh — starts waybar and keeps it alive
 #
 # Health check mechanism:
-#   We send SIGRTMIN+8 to the waybar process (a "ping"). The custom/healthcheck
-#   module in config.jsonc is configured to respond to signal 8 by writing to
-#   /tmp/waybar-pong. If the pong file doesn't appear within PING_TIMEOUT
-#   seconds, waybar is considered frozen and is restarted.
-#
-#   Signal 8 (SIGRTMIN+8) is reserved for this purpose — don't assign it to
-#   any other custom module.
+#   We check /proc/net/unix for an ESTABLISHED connection from waybar to
+#   Hyprland's socket2 event socket. If that connection is gone, waybar has
+#   lost its IPC subscription and will no longer update workspaces/windows,
+#   so we restart it.
 
 WAYBAR_CONFIG=~/.config/waybar/config.jsonc
 WAYBAR_STYLE=~/.config/waybar/style.css
 WAYBAR_CONFIG_DIR=$(dirname "$WAYBAR_CONFIG")
 
-PONG_FILE=/tmp/waybar-pong
-PING_INTERVAL=15    # seconds between health checks
-PING_TIMEOUT=5      # seconds to wait for a pong before declaring waybar frozen
-STARTUP_GRACE=20    # seconds to wait after starting before health checks begin
+CHECK_INTERVAL=10   # seconds between IPC connectivity checks
+STARTUP_GRACE=5     # seconds to wait after starting before checks begin
 
 
 # ── Waybar lifecycle ──────────────────────────────────────────────────────────
 
 start_waybar() {
-    rm -f "$PONG_FILE"
     waybar &
+    disown
 }
 
 stop_waybar() {
@@ -39,25 +34,14 @@ restart_waybar() {
 }
 
 
-# ── Health check ──────────────────────────────────────────────────────────────
+# ── IPC health check ──────────────────────────────────────────────────────────
 
-# Send a ping signal to waybar and wait for a pong response.
-# Returns 0 if waybar responds, 1 if it doesn't within PING_TIMEOUT seconds.
-ping_waybar() {
-    local waybar_pid
-    waybar_pid=$(pgrep -x waybar) || return 1   # process doesn't exist
-
-    rm -f "$PONG_FILE"
-    kill -SIGRTMIN+8 "$waybar_pid"
-
-    local waited=0
-    while [[ $waited -lt $PING_TIMEOUT ]]; do
-        sleep 0.5
-        waited=$(( waited + 1 ))
-        [[ -f "$PONG_FILE" ]] && return 0   # got a pong
-    done
-
-    return 1   # no pong — waybar is frozen
+# Returns 0 if there is an ESTABLISHED connection to Hyprland's socket2 event
+# socket (meaning waybar is subscribed and receiving workspace/window events).
+check_ipc() {
+    local socket2="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+    [[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]] || return 1
+    grep -q " 03 [0-9]* ${socket2}$" /proc/net/unix 2>/dev/null
 }
 
 
@@ -70,6 +54,7 @@ watch_config() {
         changed=$(inotifywait -e close_write -e moved_to --format '%f' "$WAYBAR_CONFIG_DIR" 2>/dev/null)
         if [[ "$changed" == "config.jsonc" ]] || [[ "$changed" == "style.css" ]]; then
             restart_waybar
+            sleep "$STARTUP_GRACE"
         fi
     done
 }
@@ -83,9 +68,12 @@ watch_config &
 sleep "$STARTUP_GRACE"
 
 while true; do
-    if ! ping_waybar; then
+    if ! pgrep -x waybar > /dev/null; then
+        start_waybar
+        sleep "$STARTUP_GRACE"
+    elif ! check_ipc; then
         restart_waybar
         sleep "$STARTUP_GRACE"
     fi
-    sleep "$PING_INTERVAL"
+    sleep "$CHECK_INTERVAL"
 done
