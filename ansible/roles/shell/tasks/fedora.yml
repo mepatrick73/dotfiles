@@ -1,0 +1,26 @@
+---
+- name: Install fish
+  dnf:
+    name: fish
+    state: present
+  become: true
+  tags: [shell, fish]
+
+- name: Set fish as default shell
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /usr/bin/fish
+  become: true
+  tags: [shell, fish]
+
+- name: Install CLI utilities
+  dnf:
+    name:
+      - btop
+      - tmux
+      - fzf
+      - stow
+      - socat
+    state: present
+  become: true
+  tags: [shell, utilities]

@@ -1,0 +1,12 @@
+---
+- name: Hyprland dotfiles setup
+  hosts: localhost
+  connection: local
+  become: false
+  roles:
+    - system
+    - hyprland
+    - fonts
+    - shell
+    - python
+    - chrome

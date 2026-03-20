@@ -1,0 +1,27 @@
+---
+- name: Install Hyprland and ecosystem packages
+  dnf:
+    name:
+      - hyprland
+      - hyprpaper
+      - xdg-desktop-portal-hyprland
+      - hyprlock
+      - hyprpolkitagent
+      - gnome-keyring
+      - libsecret
+      - waybar
+      - wofi
+      - alacritty
+      - mako
+      - network-manager-applet
+      - pavucontrol
+      - blueman
+      - grim
+      - slurp
+      - grimshot
+      - brightnessctl
+      - playerctl
+      - wdisplays
+    state: present
+  become: true
+  tags: [hyprland, packages]

@@ -41,8 +41,20 @@ dotfiles/
 │   │   └── style.css           # Matches waybar theme
 │   └── alacritty/
 │       └── alacritty.toml      # Terminal config (FiraMono Nerd Font, gruvbox)
+├── ansible/
+│   ├── site.yml                # Top-level playbook
+│   ├── inventory.yml           # Localhost target
+│   ├── ansible.cfg             # Roles path, output format
+│   ├── requirements.yml        # community.general collection
+│   └── roles/
+│       ├── system/             # COPR, SDDM
+│       ├── hyprland/           # Hyprland + all ecosystem packages
+│       ├── fonts/              # System fonts + FiraMono Nerd Font
+│       ├── shell/              # Fish, default shell, CLI utilities
+│       ├── python/             # Python3, pip, numpy, matplotlib
+│       └── chrome/             # Chrome X11 desktop entry
 └── scripts/
-    ├── install.sh              # Install all dependencies (Fedora/DNF)
+    ├── install.sh              # Bootstrap: installs Ansible and runs the playbook
     ├── setup-snapshots.sh      # Configure btrfs snapshots via snapper
     ├── gen-wallpaper.py        # Generate wireframe topology wallpaper
     └── setup-monitors.sh       # Bootstrap monitor.conf on a new machine
@@ -85,7 +97,20 @@ git submodule update --init
 bash scripts/install.sh
 ```
 
-This installs: hyprland, hyprpaper, hyprlock, xdg-desktop-portal-hyprland, sddm, hyprpolkitagent, gnome-keyring, waybar, wofi, alacritty, mako, network-manager-applet, pavucontrol, blueman, grim, slurp, grimshot, brightnessctl, playerctl, Noto Sans Mono, Font Awesome 6, FiraMono Nerd Font, fish, btop, tmux, fzf, stow, socat, wdisplays, python3, numpy, matplotlib.
+Installs Ansible, then runs the playbook which sets up: COPR, SDDM, Hyprland + ecosystem packages, system fonts, FiraMono Nerd Font, Fish shell, CLI utilities, Python packages, and the Chrome X11 desktop entry.
+
+To re-run a single role after the initial setup:
+
+```bash
+ansible-playbook ansible/site.yml --tags <role> --ask-become-pass
+# roles: system, hyprland, fonts, shell, python, chrome
+```
+
+To dry-run before applying:
+
+```bash
+ansible-playbook ansible/site.yml --check --diff --ask-become-pass
+```
 
 ### 3. Stow dotfiles
 

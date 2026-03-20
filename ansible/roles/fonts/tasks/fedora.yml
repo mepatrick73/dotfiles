@@ -1,0 +1,47 @@
+---
+- name: Install system fonts
+  dnf:
+    name:
+      - google-noto-sans-mono-fonts
+      - fontawesome-6-free-fonts
+    state: present
+  become: true
+  tags: [fonts]
+
+- name: Check FiraMono Nerd Font
+  command: fc-list
+  register: fc_list
+  changed_when: false
+  check_mode: false
+  tags: [fonts, fira]
+
+- name: Install FiraMono Nerd Font
+  when: "'FiraMono Nerd Font' not in fc_list.stdout"
+  tags: [fonts, fira]
+  block:
+    - name: Create FiraMono font directory
+      file:
+        path: "{{ ansible_env.HOME }}/.local/share/fonts/FiraMono"
+        state: directory
+
+    - name: Download FiraMono Nerd Font
+      get_url:
+        url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraMono.zip"
+        dest: /tmp/FiraMono.zip
+
+    - name: Unzip FiraMono Nerd Font
+      unarchive:
+        src: /tmp/FiraMono.zip
+        dest: "{{ ansible_env.HOME }}/.local/share/fonts/FiraMono"
+        remote_src: true
+      ignore_errors: "{{ ansible_check_mode }}"
+
+    - name: Remove zip
+      file:
+        path: /tmp/FiraMono.zip
+        state: absent
+      ignore_errors: "{{ ansible_check_mode }}"
+
+    - name: Rebuild font cache
+      command: fc-cache -f
+      ignore_errors: "{{ ansible_check_mode }}"

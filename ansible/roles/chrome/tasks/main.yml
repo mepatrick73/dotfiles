@@ -1,0 +1,26 @@
+---
+- name: Ensure local applications directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/.local/share/applications"
+    state: directory
+  tags: [chrome]
+
+- name: Patch Chrome desktop entry for X11
+  shell: |
+    dest="{{ ansible_env.HOME }}/.local/share/applications/google-chrome.desktop"
+    if ! grep -qF -- "--ozone-platform=x11" "$dest" 2>/dev/null; then
+      sed 's|Exec=/usr/bin/google-chrome-stable|Exec=/usr/bin/google-chrome-stable --ozone-platform=x11|g' \
+        /usr/share/applications/google-chrome.desktop > "$dest"
+      echo changed
+    fi
+  register: chrome_patch
+  changed_when: "'changed' in chrome_patch.stdout"
+  check_mode: false
+  tags: [chrome]
+
+- name: Clear wofi cache
+  file:
+    path: "{{ ansible_env.HOME }}/.cache/wofi"
+    state: absent
+  when: chrome_patch.changed
+  tags: [chrome]

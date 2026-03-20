@@ -1,0 +1,32 @@
+---
+- name: Enable solopasha/hyprland COPR
+  community.general.copr:
+    name: solopasha/hyprland
+    state: enabled
+  become: true
+  tags: [system, copr]
+
+- name: Install SDDM
+  dnf:
+    name: sddm
+    state: present
+  become: true
+  tags: [system, sddm]
+
+- name: Disable GDM and LightDM
+  systemd:
+    name: "{{ item }}"
+    enabled: false
+  loop:
+    - gdm
+    - lightdm
+  ignore_errors: true
+  become: true
+  tags: [system, sddm]
+
+- name: Enable SDDM
+  systemd:
+    name: sddm
+    enabled: true
+  become: true
+  tags: [system, sddm]
