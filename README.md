@@ -35,7 +35,7 @@ dotfiles/
 │   ├── waybar/
 │   │   ├── config.jsonc        # Bar modules and layout
 │   │   ├── style.css           # Dark slate theme
-│   │   └── watch-waybar.sh     # Auto-reload on config save + ping/pong health check
+│   │   └── watch-waybar.sh     # Auto-reload on config save + IPC connectivity health check
 │   ├── wofi/
 │   │   ├── config              # Launcher settings
 │   │   └── style.css           # Matches waybar theme
@@ -171,9 +171,7 @@ git pull && git submodule update --remote
 
 The bar auto-reloads when `config.jsonc` or `style.css` is saved — no manual restart needed.
 
-`watch-waybar.sh` keeps waybar alive using a ping/pong health check: every 15 seconds it sends `SIGRTMIN+8` to the waybar process. A hidden `custom/healthcheck` module is configured to respond to that signal by writing to `/tmp/waybar-pong`. If no pong arrives within 5 seconds, waybar is considered frozen and is restarted. This catches both crashes and frozen-but-running processes.
-
-Signal `SIGRTMIN+8` is reserved for this health check — don't assign it to any other custom module.
+`watch-waybar.sh` keeps waybar alive and in sync. Every 10 seconds it checks `/proc/net/unix` for an ESTABLISHED connection from waybar to Hyprland's `socket2` event socket. If that connection is gone, waybar has lost its IPC subscription and will stop updating workspaces and the active window title — so it is restarted. This catches both crashes and the IPC desync bug present in Waybar ≤ 0.14.0 (fixed in 0.15.0).
 
 To start the watcher manually (it runs automatically via `exec-once` in hyprland.conf):
 
