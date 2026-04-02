@@ -22,6 +22,8 @@
       - brightnessctl
       - playerctl
       - wdisplays
+      - wf-recorder
+      - ffmpeg
     state: present
   become: true
   tags: [hyprland, packages]
