@@ -1,6 +1,6 @@
 # dotfiles
 
-Hyprland-based Wayland desktop configuration for Fedora Linux. Dark minimal aesthetic.
+Wayland (Hyprland) and X11 (i3) desktop configuration for Fedora Linux. Dark minimal aesthetic.
 
 ## Stack
 
@@ -16,6 +16,8 @@ Hyprland-based Wayland desktop configuration for Fedora Linux. Dark minimal aest
 | [Mako](https://github.com/emersion/mako) | Notification daemon |
 | [Hyprpaper](https://github.com/hyprwm/hyprpaper) | Wallpaper daemon |
 | [grimshot](https://github.com/OctopusET/sway-contrib) | Screenshots |
+| [wf-recorder](https://github.com/ammen99/wf-recorder) + ffmpeg | GIF screen recording |
+| [i3](https://i3wm.org/) | X11 tiling window manager (alternative to Hyprland) |
 | [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/) | Volume mixer (waybar click) |
 | [Blueman](https://github.com/blueman-project/blueman) | Bluetooth manager (waybar click) |
 | [btop](https://github.com/aristocratsoftware/btop) | System monitor |
@@ -31,7 +33,10 @@ dotfiles/
 │   │   ├── monitor.conf        # Monitor layout (machine-specific)
 │   │   ├── setup-wallpaper.sh  # Generates per-monitor wallpapers at login
 │   │   ├── power-menu.sh       # Wofi power menu (lock/logout/suspend/reboot/shutdown)
+│   │   ├── record-gif.sh       # Toggle GIF screen recording (wf-recorder → ffmpeg)
 │   │   └── keybinds.conf
+│   ├── i3/
+│   │   └── config              # i3 config (mirrors Hyprland keybinds, dual-monitor layout)
 │   ├── waybar/
 │   │   ├── config.jsonc        # Bar modules and layout
 │   │   ├── style.css           # Dark slate theme
@@ -218,6 +223,15 @@ To regenerate manually:
 bash ~/.config/hypr/setup-wallpaper.sh
 ```
 
+## GIF recording
+
+`Shift+Print` toggles a region GIF recording:
+
+- **First press** — prompts to select a region with `slurp`, then starts recording via `wf-recorder`.
+- **Second press** — stops recording, converts to GIF via ffmpeg (15 fps, 800px wide, palette-optimized), and saves to `~/Videos/`. A notification confirms the path.
+
+`record-gif.sh` handles the toggle logic. `wf-recorder` and `ffmpeg` are installed by the Ansible `hyprland` role.
+
 ## Lock screen
 
 Lock with `CTRL+ALT+L`. The lock screen shows a clock and date. `hyprlock.conf` controls layout and colors.
@@ -230,3 +244,4 @@ Lock with `CTRL+ALT+L`. The lock screen shows a clock and date. `hyprlock.conf` 
 - FiraMono Nerd Font is auto-installed by `install.sh` (not in Fedora repos)
 - Google Chrome is not in `install.sh` — install manually from the Chrome website
 - NVIDIA users: `hyprland.conf` includes the required env vars (`GBM_BACKEND`, `NVD_BACKEND`, `WLR_NO_HARDWARE_CURSORS`)
+- CUDA: `config.fish` sets `LD_LIBRARY_PATH` and adds `/usr/local/cuda/bin` to `PATH` — assumes CUDA installed to `/usr/local/cuda`
