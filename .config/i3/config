@@ -55,7 +55,8 @@ bindsym $mod+Shift+r restart
 bindsym ctrl+mod1+l exec i3lock
 
 # Screenshot
-bindsym Print exec grimshot copy area
+bindsym Print exec --no-startup-id maim -s | xclip -selection clipboard -t image/png
+bindsym Shift+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
 
 # Focus
 bindsym $mod+h focus left
